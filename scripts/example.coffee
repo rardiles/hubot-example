@@ -11,23 +11,25 @@
 module.exports = (robot) ->
 
   robot.hear /patito/i, (res) ->
-    res.send "\/giphy duck"
+    res.send "cueck"
 
-  robot.respond /cuales son todos los roles?|roles|cargos/, (res) ->
+  robot.respond /cuales son todos los roles\??|roles|cargos/i, (res) ->
     res.send "PM, QA, PO, DEV"
 
-  robot.respond /quien es el (.*) del equipo?/, (res) ->
+  robot.respond /quien es el (.*)\??|quien es la (.*)\??/i, (res) ->
     rol = res.match[1]
-    if rol is "PM"
+    if rol
+      rol = rol.replace('?','')
+    if rol is "PM" or rol is "pm"
       res.reply "Dianela"
     else if rol is "QA"
-      res.reply "Se supone que Claudio"
+      res.reply "Claudio"
     else if rol is "PO"
       res.reply "Esteban"
     else if rol is "DEV"
-      res.reply "Henry"
+      res.reply "Henry, Ricardo"
     else
-      res.reply "no tenemos"
+      res.reply "No tenemos o no existe el rol."
   
   robot.respond /general$/i, (msg) ->
     robot.messageRoom 'general', 'hola a todos'
