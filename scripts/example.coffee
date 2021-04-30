@@ -16,22 +16,29 @@ module.exports = (robot) ->
   robot.respond /cuales son todos los roles\??|roles|cargos/i, (res) ->
     res.send "PM, QA, PO, DEV"
 
-  robot.respond /quien es el (.*)\??|quien es la (.*)\??/i, (res) ->
+  robot.respond /quien es (?:el|la|le) (.*)\??/i, (res) ->
     rol = res.match[1]
     if rol
       rol = rol.replace('?','')
     if rol is "PM" or rol is "pm"
       res.reply "Dianela"
-    else if rol is "QA"
+    else if rol is "QA" or rol is "qa"
       res.reply "Claudio"
-    else if rol is "PO"
+    else if rol is "PO" or rol is "po"
       res.reply "Esteban"
-    else if rol is "DEV"
+    else if rol is "DEV" or rol is "dev"
       res.reply "Henry, Ricardo"
+    else if rol is "mejor profesor" or rol is "mejor profe"
+      res.reply "Roberto :sunglasses:"
+    else if rol is "mas patero"
+      res.reply "Claudio :zipper_mouth_face:"
     else
       res.reply "No tenemos o no existe el rol."
   
   robot.respond /general$/i, (msg) ->
+    robot.messageRoom 'general', 'hola a todos'
+  
+  robot.respond /saluda$/i, (msg) ->
     robot.messageRoom 'general', 'hola a todos'
 
   #
